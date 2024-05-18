@@ -142,3 +142,155 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+// Destructing
+/*
+const book = getBook(3);
+
+// const title = book.title;
+// const author = book.author;
+
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } = book; // get the key name to the variable name, but the variable name should be the exact key name!
+
+console.log(author, title, genres);
+
+// const primaryGenre = genres[0];
+// const secondaryGenre = genres[1];
+
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres; // get 2 first element assign to each variable, and list of the other list variables from 2 to last
+
+console.log(primaryGenre, secondaryGenre, otherGenres);
+
+const newGenres = [...genres, "epic fantasy"];
+
+const updatedBook = { ...book, moviePublicationDate: "2001-12-19", pages: 1210 }; // if there is same keys, the value in the key is set to the key value in the rightest position in the object ({})
+updatedBook;
+
+const getYear = (year) => year.split("-")[0];
+console.log(getYear(publicationDate));
+
+const summary = `${title}, a ${pages}-page long book, was written by ${author} and published in ${getYear(publicationDate)
+}. The book has ${hasMovieAdaptation ? "": "not"} been adapted as a movie`;
+summary;
+
+const pagesRange = pages > 1000 ? 'over a thousand': 'less than 1000';
+pagesRange;
+console.log(`The book has ${pagesRange} pages`);
+
+console.log(true && 'Some string');
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// falsy: 0, '', null, undefined
+console.log('jonas' && 'Some string');
+console.log(0 && "Some string");
+
+console.log(true || "Some string");
+console.log(false || "Some string");
+
+console.log(book.translations.spanish);
+
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+spanishTranslation;
+
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "no data";
+// countWrong;
+
+// const count = book.reviews.librarything.reviewsCount ?? "no data"; // ?? is like || but 0 is counting as true!
+// count;
+
+const getTotalReviewCount = (book) => {
+  const goodread = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodread + librarything;
+};
+console.log(getTotalReviewCount(book));
+
+*/
+/*
+const getTotalReviewCount = (book) => {
+  const goodread = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodread + librarything;
+};
+
+const books = getBooks();
+
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+    title: book.title,
+    author: book.author,
+    reviewsCount: getTotalReviewCount(book)
+}));
+essentialData;
+
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBooksWithMovie;
+
+const adventureBooks = books.filter((book) =>
+   book.genres.includes("adventure")
+).map((book) => book.title);
+adventureBooks;
+
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0); // acc is the previous value, start from 0, it sum up all the values...
+pagesAllBooks;
+
+const arr = [3, 7, 1, 9, 6];
+const sorted = arr.slice().sort((a, b) => a - b); // a and b is the current value and the next value
+sorted;
+arr;
+
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+sortedByPages;
+
+// 1) Add book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling"
+};
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+// 2) Delete book object from array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 6);
+booksAfterDelete;
+
+// 3) Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) => 
+  book.id === 1? {...book, pages: 1} : book
+);
+booksAfterUpdate;
+
+*/
+/*
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+
+console.log("jonas");
+*/
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+
+  return data;
+}
+
+const todos = getTodos(); // the await is only in the function call waiting, it keeps runnunig the main c0de after calling this async function...
+console.log(todos);
+
+
+console.log("jonas");
