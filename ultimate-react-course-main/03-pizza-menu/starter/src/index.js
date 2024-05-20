@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -47,7 +47,6 @@ const pizzaData = [
   },
 ];
 
-
 function App() {
   return (
     <div className="container">
@@ -73,11 +72,41 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      {/* unordered list */}
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
+
+      {/* <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={10}
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mushrooms"
+        photoName="pizzas/funghi.jpg"
+        price={12}
+      /> */}
     </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      {/* list index */}
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
@@ -85,9 +114,10 @@ function Footer() {
   const hour = new Date().getHours();
   const openHour = 8;
   const closeHour = 22;
-  const isOpen = hour >= openHour && hour <= closeHour
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
-  // if (hour >= openHour && hour <= closeHour) alert("we're currently open!") 
+  // if (hour >= openHour && hour <= closeHour) alert("we're currently open!")
   // else alert("Sorry we're closed!");
 
   return (
@@ -98,16 +128,6 @@ function Footer() {
   // return React.createElement("footer", null, "we're currently open!");
 }
 
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
-  );
-}
-
 // React v18
 const root = ReactDOM.createRoot(document.getElementById("root")); // where i want the root? in the div where the id === "root"
 root.render(
@@ -115,13 +135,3 @@ root.render(
     <App />
   </React.StrictMode>
 ); // render the App component to this div related..., Strict Mode is render twice, in debug it checks bugs
-
-
-
-
-
-
-
-
-
-
