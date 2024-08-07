@@ -12,11 +12,11 @@ export function convertToEmoji(countryCode) {
     .toUpperCase()
     .split("")
     .map((char) => 127397 + char.charCodeAt());
+  console.log(String.fromCodePoint(...codePoints));
   return String.fromCodePoint(...codePoints);
 }
 
-const BASE_URL =
-  "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0";
+const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 
 function Form() {
   const [lat, lng] = useUrlPosition();
@@ -40,7 +40,7 @@ function Form() {
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
           const data = await res.json();
-
+          console.log(data, lat, lng);
           if (!data.countryCode)
             throw new Error("Doesnt seem to be any city. Click somewhere else");
 
@@ -53,6 +53,7 @@ function Form() {
           setIsLoadingGeocoding(false);
         }
       }
+      console.log("ddvdfvfdv");
       fetchCityData();
     },
     [lat, lng]
